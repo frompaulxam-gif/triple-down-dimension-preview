@@ -1,0 +1,36 @@
+/* v2 changes only: actual client marks and the collaboration opening. */
+.logo-version .site-header .wordmark{opacity:0}
+#opening-lockup{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;align-items:center;gap:18px;z-index:1;pointer-events:none;white-space:nowrap}
+#moving-tdg{font-size:40px;line-height:1;transform-origin:top left;will-change:transform;white-space:nowrap}
+#collab-cross{font-size:22px;font-weight:300;color:#454545}
+#brand-window{width:140px;height:110px;overflow:hidden;position:relative;flex-shrink:0}
+#brand-reel{will-change:transform}
+.brand-slot{height:110px;width:140px;display:flex;align-items:center;justify-content:center;padding:8px}
+.client-logo{display:block;max-width:100%;max-height:100%;object-fit:contain}
+.client-logo.dark{filter:brightness(0)}
+.client-logo.invert{filter:invert(1)}
+.brand-slot img{max-width:130px;max-height:83px}
+.brand-slot img[src*="audrey"]{max-height:95px}
+#case-logo{height:67px;max-width:220px;display:flex;align-items:center;justify-content:flex-start}
+#case-logo .client-logo{width:auto;max-width:220px;max-height:64px}
+#case-logo img[src*="audrey"]{max-height:92px}
+#case-logo img[src*="moonshine"],#case-logo img[src*="wang-records"]{max-height:78px}
+.caption-heading{align-items:center;min-height:76px}
+.case-caption p,.case-caption button{margin-left:29px}
+.logo-fallback{font-size:30px;font-weight:600;letter-spacing:-.035em}
+.project-index{top:75px;gap:3px}
+.project-index button{min-height:21px;height:21px;width:92px;padding:2px 4px;display:flex;align-items:center;justify-content:flex-end;opacity:.42;transition:opacity .2s}
+.project-index button[aria-current=true],.project-index button:hover{opacity:1}
+.project-index img{max-width:85px;max-height:18px;object-fit:contain;object-position:right center}
+.project-index img[src*="audrey"],.project-index img[src*="moonshine"],.project-index img[src*="wang-records"],.project-index img[src*="daal"]{max-height:23px;max-width:64px}
+.project-index button:has(img[src*="moonshine"]){opacity:1}
+.case-category{top:51%;font-size:20px}
+@media(min-width:701px) and (max-width:1090px){#case-logo{height:54px}.caption-heading{min-height:54px}#case-logo .client-logo{max-height:50px;max-width:190px}.case-category{top:82%}}
+@media(max-width:700px){#opening-lockup{gap:8px}#moving-tdg{font-size:23px}#collab-cross{font-size:18px}#brand-window{width:75px}.brand-slot{width:75px;padding:4px}.brand-slot img{max-width:72px;max-height:68px}#case-logo{height:49px;max-width:190px}.caption-heading{min-height:52px}#case-logo .client-logo{max-width:190px;max-height:47px}#case-logo img[src*="audrey"],#case-logo img[src*="moonshine"],#case-logo img[src*="wang-records"]{max-height:55px}.case-caption p,.case-caption button{margin-left:0}.case-caption{bottom:95px}.case-caption p{margin-top:9px}}
+@media(max-width:360px){#opening-lockup{gap:7px}#moving-tdg{font-size:20px}#brand-window{width:64px}.brand-slot{width:64px}.brand-slot img{max-width:61px}#collab-cross{font-size:16px}}
+@media(prefers-reduced-motion:reduce){.logo-version .site-header .wordmark{opacity:1!important}#opening-lockup{visibility:hidden!important}}
+@media(max-width:700px){.logo-version .site-header .wordmark{font-size:22px;max-width:none;white-space:nowrap}}
+#detail-logo{height:110px;margin:25px 0;max-width:500px;display:flex;align-items:center}#detail-logo img{max-width:450px;max-height:110px}#detail-logo .dark,#detail-logo img[src*="dig-in"]{filter:brightness(0) invert(1)}#detail-logo .invert{filter:none}#detail-logo img[src*="audrey"],#detail-logo img[src*="moonshine"]{max-height:120px}@media(max-width:700px){#detail-logo{height:85px;max-width:78vw}#detail-logo img{max-width:78vw;max-height:85px}}
+#moving-tdg{max-width:none;flex-shrink:0}
+#detail-next .client-logo{max-width:240px;max-height:85px}
+#case-logo{width:220px;flex-shrink:1}@media(max-width:700px){#case-logo{width:190px}}
