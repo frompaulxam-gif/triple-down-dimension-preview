@@ -1,36 +1,57 @@
-/* v2 changes only: actual client marks and the collaboration opening. */
-.logo-version .site-header .wordmark{opacity:0}
-#opening-lockup{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;align-items:center;gap:18px;z-index:1;pointer-events:none;white-space:nowrap}
-#moving-tdg{font-size:40px;line-height:1;transform-origin:top left;will-change:transform;white-space:nowrap}
-#collab-cross{font-size:22px;font-weight:300;color:#454545}
-#brand-window{width:140px;height:110px;overflow:hidden;position:relative;flex-shrink:0}
-#brand-reel{will-change:transform}
-.brand-slot{height:110px;width:140px;display:flex;align-items:center;justify-content:center;padding:8px}
+@font-face{font-family:TDGArchivo;src:url('../assets/tdg-archivo.woff2') format('woff2');font-style:normal;font-weight:100 900;font-display:swap}
+/* The selected co-brand opening, with the same mark and name in its destination. */
+.logo-version .site-header .wordmark{display:flex;align-items:center;gap:12px;max-width:none;white-space:nowrap;line-height:1;opacity:0}
+.tdg-mark{display:block;width:72px;height:44px;object-fit:contain;filter:invert(1)}
+.tdg-name{font-family:TDGArchivo,Arial,sans-serif;font-size:10px;font-weight:700;line-height:1.15;letter-spacing:-.1px}
+#opening-lockup{position:fixed;inset:0;z-index:7;pointer-events:none}
+#opening-lockup[hidden]{display:none}
+#moving-tdg{position:fixed;width:72px;height:44px;max-width:none;object-fit:contain;filter:invert(1);transform-origin:top left;will-change:transform}
+#moving-name{position:fixed;transform-origin:top left;white-space:nowrap}
+#collab-cross{position:absolute;left:calc(50% - 17px);top:calc(29% - 22px);font-family:TDGArchivo,Arial,sans-serif;font-size:27px;font-weight:300;line-height:44px}
+#brand-window{position:absolute;left:calc(50% + 34px);top:calc(29% - 50px);width:190px;height:100px;overflow:hidden;mask-image:linear-gradient(transparent,#000 12%,#000 88%,transparent)}
+#brand-reel{display:flex;flex-direction:column;will-change:transform}
+.brand-slot{width:190px;height:100px;flex:0 0 100px;display:flex;align-items:center;justify-content:center}
+.brand-slot img{max-width:170px;max-height:75px}
 .client-logo{display:block;max-width:100%;max-height:100%;object-fit:contain}
 .client-logo.dark{filter:brightness(0)}
 .client-logo.invert{filter:invert(1)}
-.brand-slot img{max-width:130px;max-height:83px}
-.brand-slot img[src*="audrey"]{max-height:95px}
-#case-logo{height:67px;max-width:220px;display:flex;align-items:center;justify-content:flex-start}
-#case-logo .client-logo{width:auto;max-width:220px;max-height:64px}
-#case-logo img[src*="audrey"]{max-height:92px}
-#case-logo img[src*="moonshine"],#case-logo img[src*="wang-records"]{max-height:78px}
-.caption-heading{align-items:center;min-height:76px}
-.case-caption p,.case-caption button{margin-left:29px}
+/* Caption space is measured alongside the image and controls. */
+.logo-version .case-caption{left:var(--caption-left,4.5vw);top:var(--caption-top,44%);bottom:auto;width:var(--caption-width,24vw);transform:none;background:#fff;padding:0;z-index:3}
+.logo-version .caption-heading{display:flex;align-items:center;gap:13px;min-height:64px}
+.logo-version #case-number{flex-shrink:0}
+.logo-version #case-logo{height:64px;width:220px;max-width:calc(100% - 24px);min-width:0;flex:1 1 220px;display:flex;align-items:center;justify-content:flex-start}
+.logo-version #case-logo .client-logo{max-width:100%;max-height:64px;width:auto;height:auto;object-fit:contain}
+.logo-version .case-caption p{width:calc(100% - 29px);max-width:none;margin:13px 0 0 29px;font-size:13px;line-height:1.75}
+.logo-version .case-caption button{margin:15px 0 0 29px;font-size:12px}
 .logo-fallback{font-size:30px;font-weight:600;letter-spacing:-.035em}
-.project-index{top:75px;gap:3px}
-.project-index button{min-height:21px;height:21px;width:92px;padding:2px 4px;display:flex;align-items:center;justify-content:flex-end;opacity:.42;transition:opacity .2s}
-.project-index button[aria-current=true],.project-index button:hover{opacity:1}
-.project-index img{max-width:85px;max-height:18px;object-fit:contain;object-position:right center}
-.project-index img[src*="audrey"],.project-index img[src*="moonshine"],.project-index img[src*="wang-records"],.project-index img[src*="daal"]{max-height:23px;max-width:64px}
-.project-index button:has(img[src*="moonshine"]){opacity:1}
-.case-category{top:51%;font-size:20px}
-@media(min-width:701px) and (max-width:1090px){#case-logo{height:54px}.caption-heading{min-height:54px}#case-logo .client-logo{max-height:50px;max-width:190px}.case-category{top:82%}}
-@media(max-width:700px){#opening-lockup{gap:8px}#moving-tdg{font-size:23px}#collab-cross{font-size:18px}#brand-window{width:75px}.brand-slot{width:75px;padding:4px}.brand-slot img{max-width:72px;max-height:68px}#case-logo{height:49px;max-width:190px}.caption-heading{min-height:52px}#case-logo .client-logo{max-width:190px;max-height:47px}#case-logo img[src*="audrey"],#case-logo img[src*="moonshine"],#case-logo img[src*="wang-records"]{max-height:55px}.case-caption p,.case-caption button{margin-left:0}.case-caption{bottom:95px}.case-caption p{margin-top:9px}}
-@media(max-width:360px){#opening-lockup{gap:7px}#moving-tdg{font-size:20px}#brand-window{width:64px}.brand-slot{width:64px}.brand-slot img{max-width:61px}#collab-cross{font-size:16px}}
-@media(prefers-reduced-motion:reduce){.logo-version .site-header .wordmark{opacity:1!important}#opening-lockup{visibility:hidden!important}}
-@media(max-width:700px){.logo-version .site-header .wordmark{font-size:22px;max-width:none;white-space:nowrap}}
-#detail-logo{height:110px;margin:25px 0;max-width:500px;display:flex;align-items:center}#detail-logo img{max-width:450px;max-height:110px}#detail-logo .dark,#detail-logo img[src*="dig-in"]{filter:brightness(0) invert(1)}#detail-logo .invert{filter:none}#detail-logo img[src*="audrey"],#detail-logo img[src*="moonshine"]{max-height:120px}@media(max-width:700px){#detail-logo{height:85px;max-width:78vw}#detail-logo img{max-width:78vw;max-height:85px}}
-#moving-tdg{max-width:none;flex-shrink:0}
+.logo-version .case-category{right:4.5vw;left:auto;top:var(--category-top,44%);width:var(--caption-width,24vw);transform:translateY(-50%);font-size:20px;line-height:1.2}
+.logo-version .project-index{top:75px;gap:0}
+.logo-version .project-index button{min-height:20px;height:20px;width:92px;padding:1px 4px;display:flex;align-items:center;justify-content:flex-end;opacity:.42;transition:opacity .2s}
+.logo-version .project-index button[aria-current=true],.logo-version .project-index button:hover{opacity:1}
+.logo-version .project-index img{max-width:85px;max-height:18px;object-fit:contain;object-position:right center}
+.logo-version .project-index img[src*="audrey"],.logo-version .project-index img[src*="moonshine"],.logo-version .project-index img[src*="wang-records"],.logo-version .project-index img[src*="daal"]{max-height:20px;max-width:64px}
+.logo-version .project-index button:has(img[src*="moonshine"]){opacity:1}
+.gallery-stacked .project-index,.gallery-stacked .case-category{display:none}
+.gallery-stacked #gallery{clip-path:inset(0 0 max(0px,calc(100% - var(--photo-bottom,60vh) - 20px)) 0)}
+.gallery-compact .caption-heading{min-height:40px}
+.gallery-compact #case-logo{height:40px}
+.gallery-compact #case-logo .client-logo{max-height:40px}
+.logo-version .gallery-compact .case-caption p{font-size:12px;line-height:1.55;margin-top:8px}
+.logo-version .gallery-compact .case-caption button{margin-top:8px}
+.logo-version .gallery-compact .case-category{font-size:16px}
+#detail-logo{height:110px;margin:25px 0;max-width:500px;display:flex;align-items:center}
+#detail-logo img{max-width:450px;max-height:110px}
+#detail-logo .dark,#detail-logo img[src*="dig-in"]{filter:brightness(0) invert(1)}
+#detail-logo .invert{filter:none}
 #detail-next .client-logo{max-width:240px;max-height:85px}
-#case-logo{width:220px;flex-shrink:1}@media(max-width:700px){#case-logo{width:190px}}
+@media(max-width:700px){
+  .logo-version .site-header .wordmark{gap:8px}
+  .tdg-mark{width:52px;height:33px}.tdg-name{font-size:8px}
+  #moving-tdg{width:52px;height:33px}
+  #collab-cross{left:calc(50% - 8px);font-size:22px}
+  #brand-window{left:calc(50% + 21px);top:calc(29% - 40px);width:128px;height:80px}
+  .brand-slot{width:128px;height:80px;flex-basis:80px}.brand-slot img{max-width:115px;max-height:54px}
+  #detail-logo{height:85px;max-width:78vw}#detail-logo img{max-width:78vw;max-height:85px}
+}
+@media(max-height:699px){.logo-version .project-index{display:none}}
+@media(prefers-reduced-motion:reduce){.logo-version .site-header .wordmark{opacity:1!important}#opening-lockup{display:none}}
