@@ -137,7 +137,7 @@
     const circleY=height*(.64-.14*settle),radius=smallRadius+(finalRadius-smallRadius)*settle;
     const factor=clamp(Math.min(width,height)/900,.34,1),points=[];
     orbitCards.forEach((el,i)=>{
-      const arrival=reduced.matches?1:ease(i===0?(phase.elapsed-860)/180:(phase.distance-i)/.72);
+      const arrival=reduced.matches?1:ease(i===0?(phase.elapsed-860)/180:(phase.distance-i)/opening.arrivalSpan);
       const a=i/count*TAU-Math.PI/2+angle+spin,r=radius*arrival*(reduced.matches?1:1+Math.sin(now*.0006+i)*.012);
       const x=Math.cos(a)*r,y=Math.sin(a)*r+circleY-height/2,scale=.245*factor*(.8+.2*arrival);
       el.style.transform=`translate(-50%,-50%) translate(${x}px,${y}px) rotate(${Math.sin(i*31.17)*3.5}deg) scale(${scale})`;

@@ -5,18 +5,22 @@ function createCollaborationOpening({projects,reduced}) {
   const reel=$('brand-reel'),windowEl=$('brand-window'),name=$('moving-name');
   const header=document.querySelector('.site-header .wordmark');
   const headerMark=header.querySelector('.tdg-mark'),headerName=header.querySelector('.tdg-name');
-  const buildSeconds=5,rushSeconds=1,brakeSeconds=.45,initialSpeed=3.5,buildSpeed=4.5,peakSpeed=22;
-  const buildDistance=20,rushDistance=13.25,cruiseSeconds=1.8/22;
+  const rushSeconds=1,brakeSeconds=.45,initialSpeed=3.5,buildSpeed=4.5,peakSpeed=22;
+  const arrivalSpan=.72,buildDistance=projects.length-1+arrivalSpan;
+  // The gentle build ends exactly when the final card finishes arriving.
+  const buildSeconds=buildDistance/((initialSpeed+buildSpeed)/2);
+  const rushDistance=(buildSpeed+peakSpeed)*rushSeconds/2;
+  const cruiseSeconds=(40-buildDistance-rushDistance-peakSpeed*brakeSeconds/2)/peakSpeed;
   const motionEnd=900+(buildSeconds+rushSeconds+cruiseSeconds+brakeSeconds)*1000;
   const total=motionEnd+1050;
   let animations=[],timer,started=0,running=false,slot=100;
   function motion(elapsed) {
     const t=(elapsed-900)/1000;let distance=0,speed=0;
-    if(t>0&&t<=5){const q=t/5;distance=initialSpeed*t+(buildSpeed-initialSpeed)*5*(q**3-.5*q**4);speed=initialSpeed+(buildSpeed-initialSpeed)*q*q*(3-2*q);}
-    else if(t>5&&t<=6){const q=t-5;distance=buildDistance+buildSpeed*q+(peakSpeed-buildSpeed)*(q**3-.5*q**4);speed=buildSpeed+(peakSpeed-buildSpeed)*q*q*(3-2*q);}
-    else if(t>6&&t<=6+cruiseSeconds){distance=buildDistance+rushDistance+peakSpeed*(t-6);speed=peakSpeed;}
-    else if(t>6+cruiseSeconds&&t<6+cruiseSeconds+brakeSeconds){const q=(t-6-cruiseSeconds)/brakeSeconds;distance=buildDistance+rushDistance+peakSpeed*cruiseSeconds+peakSpeed*brakeSeconds*(q-q**3+.5*q**4);speed=peakSpeed*(1-q*q*(3-2*q));}
-    else if(t>=6+cruiseSeconds+brakeSeconds){distance=40;}
+    if(t>0&&t<=buildSeconds){const q=t/buildSeconds;distance=initialSpeed*t+(buildSpeed-initialSpeed)*buildSeconds*(q**3-.5*q**4);speed=initialSpeed+(buildSpeed-initialSpeed)*q*q*(3-2*q);}
+    else if(t>buildSeconds&&t<=buildSeconds+rushSeconds){const q=(t-buildSeconds)/rushSeconds;distance=buildDistance+buildSpeed*rushSeconds*q+(peakSpeed-buildSpeed)*rushSeconds*(q**3-.5*q**4);speed=buildSpeed+(peakSpeed-buildSpeed)*q*q*(3-2*q);}
+    else if(t>buildSeconds+rushSeconds&&t<=buildSeconds+rushSeconds+cruiseSeconds){distance=buildDistance+rushDistance+peakSpeed*(t-buildSeconds-rushSeconds);speed=peakSpeed;}
+    else if(t>buildSeconds+rushSeconds+cruiseSeconds&&t<buildSeconds+rushSeconds+cruiseSeconds+brakeSeconds){const q=(t-buildSeconds-rushSeconds-cruiseSeconds)/brakeSeconds;distance=buildDistance+rushDistance+peakSpeed*cruiseSeconds+peakSpeed*brakeSeconds*(q-q**3+.5*q**4);speed=peakSpeed*(1-q*q*(3-2*q));}
+    else if(t>=buildSeconds+rushSeconds+cruiseSeconds+brakeSeconds){distance=40;}
     return {distance,speed,normalisedSpeed:speed/peakSpeed};
   }
   function finish() {
@@ -56,5 +60,5 @@ function createCollaborationOpening({projects,reduced}) {
     if(running){reel.style.transform=`translateY(${-phase.distance*slot}px)`;reel.style.filter=`blur(${(phase.normalisedSpeed*3.2).toFixed(2)}px)`;cross.style.filter=`blur(${(phase.normalisedSpeed*.8).toFixed(2)}px)`;}
     return {...phase,elapsed,running,settle:Math.max(0,Math.min(1,(elapsed-(motionEnd+450))/600)),total};
   }
-  return {start,finish,sample,total,motionEnd,get running(){return running;}};
+  return {start,finish,sample,total,motionEnd,arrivalSpan,get running(){return running;}};
 }
